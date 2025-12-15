@@ -1,0 +1,61 @@
+name: Generate Snake Game Animation
+
+# Controls when the action will run
+on:
+  # Triggers the workflow on schedule (runs every 24 hours)
+  schedule:
+    - cron: "0 0 * * *"
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+  # Triggers the workflow on push to main branch
+  push:
+    branches: [ main ]
+
+# Permissions needed for the workflow
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      # Generates the snake
+      - name: Generate github-contribution-grid-snake.svg
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: Sharathcoder
+          outputs: |
+            dist/github-contribution-grid-snake-dark.svg?palette=github-dark
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Commit and push the snake files directly
+      - name: Commit and push snake files
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout --orphan output
+          git rm -rf .
+          mv dist/* .
+          git add *.svg
+          git commit -m "Update snake animations - $(date)"
+          git push origin output --force
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
