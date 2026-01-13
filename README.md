@@ -9,14 +9,14 @@
 <img src="https://64.media.tumblr.com/61d4fea89f86eb4cb5a7e616d9cd4832/tumblr_owi25v6uAo1r4gsiio1_1280.gif" alt="Banner" width="100%" />
 
 ## 📌 About Me
-  <b>Developer Sharath() {</b> </br>
+  <b>Developer Sharath() { </br>
   role("Backend Specialist"); </br>
   mindset(solve, scale); </br>
   stack("DSA in C++", "ASP.NET Core Web API"); </br>
   principles(clean_code, fundamentals, consistency); </br>
   build("Think → Build → Optimize"); </br>
   target(performance, maintainability); </br>
-}
+} </b>
 
 
 
